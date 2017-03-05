@@ -1,5 +1,5 @@
-main.sex: main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Modelos.o Metodos.o Videojuego.o Microsoftgame.o Sonygame.o Nintendogame.o
-	g++ main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Modelos.o Metodos.o Videojuego.o Microsoftgame.o Sonygame.o Nintendogame.o -o main
+main.sex: main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Videojuego.o Microsoftgame.o Sonygame.o Nintendogame.o
+	g++ main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Videojuego.o Microsoftgame.o Sonygame.o Nintendogame.o -o main
 main.o:	main.cpp Includes.h
 	g++ -c main.cpp 
 Consola.o:	Consola.cpp Consola.h
@@ -16,10 +16,6 @@ Administrador.o:	Administrador.cpp Administrador.h Usuario.h
 	g++ -c Administrador.cpp
 Vendedor.o:	Vendedor.cpp Vendedor.h Usuario.h
 	g++ -c Vendedor.cpp
-Modelos.o:	Modelos.cpp Modelos.h
-	g++ -c Modelos.cpp
-Metodos.o:	Metodos.cpp Metodos.h
-	g++ -c Metodos.cpp
 Videojuego.o:	Videojuego.cpp Videojuego.h
 	g++ -c Videojuego.cpp
 Microsoftgame.o:	Microsoftgame.cpp Microsoftgame.h Videojuego.h

@@ -2,12 +2,15 @@
 #include "Microsoft.h"
 #include "Sony.h"
 #include "Nintendo.h"
-#include "Modelos.h"
 #include "Usuario.h"
 #include "Administrador.h"
 #include "Vendedor.h"
-#include "Metodos.h"
 #include "Videojuego.h"
 #include "Microsoft.h"
 #include "Nintendogame.h"
 #include "Sonygame.h"
+#include <ctime>
+#include <vector>
+#include <sstream>
+#include <iostream>
+#include <string>
