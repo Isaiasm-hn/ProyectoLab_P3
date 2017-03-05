@@ -1,5 +1,5 @@
 main.sex: main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Modelos.o Metodos.o Videojuego.o Microsoftgame.o Sonygame.o Nintendogame.o
-	g++ main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Modelos.o Metodos.o -o main
+	g++ main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Modelos.o Metodos.o Videojuego.o Microsoftgame.o Sonygame.o Nintendogame.o -o main
 main.o:	main.cpp Includes.h
 	g++ -c main.cpp 
 Consola.o:	Consola.cpp Consola.h

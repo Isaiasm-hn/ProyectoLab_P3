@@ -7,3 +7,7 @@
 #include "Administrador.h"
 #include "Vendedor.h"
 #include "Metodos.h"
+#include "Videojuego.h"
+#include "Microsoft.h"
+#include "Nintendogame.h"
+#include "Sonygame.h"
