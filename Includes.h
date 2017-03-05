@@ -9,6 +9,12 @@
 #include "Microsoft.h"
 #include "Nintendogame.h"
 #include "Sonygame.h"
+#include "Bandaigame.h"
+#include "Konamigame.h"
+#include "SquareEnixgame.h"
+#include "ElectronicArtgame.h"
+#include "Segagame.h"
+#include "Ubisoftgame.h"
 #include <ctime>
 #include <vector>
 #include <sstream>

@@ -1,4 +1,4 @@
-main.sex: main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Videojuego.o Microsoftgame.o Sonygame.o Nintendogame.o
+main.sex: main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Videojuego.o Microsoftgame.o Sonygame.o Nintendogame.o Bandaigame.o Konamigame.o SquareEnixgame.o ElectronicArtgame.o Segagame.o Ubisoftgame.o
 	g++ main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Videojuego.o Microsoftgame.o Sonygame.o Nintendogame.o -o main
 main.o:	main.cpp Includes.h
 	g++ -c main.cpp 
@@ -24,5 +24,17 @@ Sonygame.i: Sonygame.cpp Sonygame.h Videojuego.h
 	g++ -c Sonygame.cpp
 Nintendogame.o:	Nintendogame.cpp Nintendogame.h Videojuego.h
 	g++ -c Nintendogame.cpp
+Bandaigame.o:	Bandaigame.cpp Bandaigame.h Videojuego.h
+	g++ -c Bandaigame.cpp
+Konamigame.o:	Konamigame.cpp Konamigame.h Videojuego.h
+	g++ -c Konamigame.cpp
+SquareEnixgame.o:	SquareEnixgame.cpp SquareEnixgame.h Videojuego.h
+	g++ -c SquareEnixgame.cpp
+ElectronicArtgame.o: ElectronicArtgame.cpp ElectronicArtgame.h Videojuego.h
+	g++ -c SquareEnixgame.cpp
+Segagame.o:	Segagame.cpp Segagame.h	Videojuego.h
+	g++ -c Segagame.cpp
+Ubisoftgame.o:	Ubisoftgame.cpp Ubisoftgame.h Videojuego.h
+	g++ -c Ubisoftgame.cpp
 clean:
 	rm *.o main
