@@ -2,10 +2,11 @@
 
 using namespace std;
 
-Consola::Consola(string pEstado,string pSerie,double pPrecio){
+Consola::Consola(string pEstado,string pSerie,double pPrecio,int pAno){
 	this->estado=pEstado;
 	this->serie=pSerie;
 	this->precio=pPrecio;
+	this->ano=pAno;
 
 }
 
@@ -28,5 +29,10 @@ void Consola::setPrecio(double p){
 double Consola::getPrecio(){
 	return precio;
 }
-
+void Consola::setAno(int x){
+	this->ano=x;
+}
+int Consola::getAno(){
+	return ano;
+}
 

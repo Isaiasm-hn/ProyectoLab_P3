@@ -1,0 +1,8 @@
+#include "Consola.h"
+#include "Microsoft.h"
+#include "Sony.h"
+#include "Nintendo.h"
+#include "Modelos.h"
+#include "Usuario.h"
+#include "Administrador.h"
+#include "Vendedor.h"

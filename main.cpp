@@ -1,5 +1,4 @@
-#include "Consola.h"
-#include "Microsoft.h"
+#include "Includes.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -7,11 +6,16 @@
 using namespace std;
 
 int main(){
-	Consola* c=new Consola("prueba","p2",1254.2);
-	cout<<c->getEstado();
-	Microsoft* m=new Microsoft("Xbox","prueba","p2",1254.2);
-	cout<<endl<<m->getModelo();
-	delete c;
-	delete m;
+	Modelos mdl;
+	vector<Consola*> cnsl;
+	Nintendo* nin=new Nintendo(mdl.getNintendo(1),"Bueno","Excelente",2333,2016);
+	Microsoft* min=new Microsoft(mdl.getMicrosoft(2),"Bueno","Excelente",2323,2016);
+	Sony* son=new Sony(mdl.getSony(1),"Bueno","Excelente",2323,2911);
+	cnsl.push_back(nin);
+	cnsl.push_back(min);
+	cnsl.push_back(son);
+	for (int i = 0; i < cnsl.size(); ++i){
+		cout<<cnsl.at(i)->getEstado()<<endl;
+	}
 	return 0;
 }

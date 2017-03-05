@@ -9,11 +9,11 @@ private:
 	string estado;
 	string serie;
 	double precio;
-
+	int ano;
 
 public:
 	//contructor
-	Consola(string,string,double);
+	Consola(string,string,double,int);
 	
 	void setEstado(string);
 	string getEstado();
@@ -21,6 +21,8 @@ public:
 	string getSerie();
 	void setPrecio(double);
 	double getPrecio();
+	void setAno(int);
+	int getAno();
 
 
 	
