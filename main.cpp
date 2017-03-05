@@ -7,6 +7,7 @@ using namespace std;
 
 int main(){
 	Modelos mdl;
+	Metodos mt;
 	vector<Consola*> cnsl;
 	Nintendo* nin=new Nintendo(mdl.getNintendo(1),"Bueno","Excelente",2333,2016);
 	Microsoft* min=new Microsoft(mdl.getMicrosoft(2),"Bueno","Excelente",2323,2016);
@@ -19,6 +20,7 @@ int main(){
 	}
 	Vendedor* user=new Vendedor("Juan Perez");
 	user->setEntrada();
-	cout<<user->getEntrada();
+	cout<<"Fecha:   "<<mt.getFecha()<<endl;
+	cout<<"Hora:   "<<mt.getTime()<<endl;
 	return 0;
 }

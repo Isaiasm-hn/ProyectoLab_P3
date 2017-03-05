@@ -6,3 +6,4 @@
 #include "Usuario.h"
 #include "Administrador.h"
 #include "Vendedor.h"
+#include "Metodos.h"
