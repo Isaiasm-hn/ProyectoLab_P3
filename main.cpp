@@ -17,5 +17,8 @@ int main(){
 	for (int i = 0; i < cnsl.size(); ++i){
 		cout<<cnsl.at(i)->getEstado()<<endl;
 	}
+	Vendedor* user=new Vendedor("Juan Perez");
+	user->setEntrada();
+	cout<<user->getEntrada();
 	return 0;
 }
