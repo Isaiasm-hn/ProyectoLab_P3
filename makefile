@@ -1,4 +1,4 @@
-main.sex: main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Modelos.o Metodos.o
+main.sex: main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Modelos.o Metodos.o Videojuego.o
 	g++ main.o Consola.o Sony.o Microsoft.o Nintendo.o Usuario.o Vendedor.o Administrador.o Modelos.o Metodos.o -o main
 main.o:	main.cpp Includes.h
 	g++ -c main.cpp 
@@ -20,5 +20,7 @@ Modelos.o:	Modelos.cpp Modelos.h
 	g++ -c Modelos.cpp
 Metodos.o:	Metodos.cpp Metodos.h
 	g++ -c Metodos.cpp
+Videojuego.o:	Videojuego.cpp Videojuego.h
+	g++ -c Videojuego.cpp
 clean:
 	rm *.o main
