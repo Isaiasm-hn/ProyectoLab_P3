@@ -13,6 +13,7 @@ private:
 
 public:
 	//contructor
+	Consola();
 	Consola(string,string,double,int);
 	
 	void setEstado(string);

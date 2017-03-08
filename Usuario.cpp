@@ -9,3 +9,8 @@ void Usuario::setNombre(string pNombre){
 string Usuario::getNombre(){
 	return nombre;
 }
+
+void Usuario::setPassword(string){
+
+	//nada
+}

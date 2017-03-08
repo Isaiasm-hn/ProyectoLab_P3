@@ -9,7 +9,8 @@ private:
 public:
 	Usuario(string);
 	void setNombre(string);
-	string getNombre();
+	virtual string getNombre();
+	virtual void setPassword(string);
 	
 	
 };

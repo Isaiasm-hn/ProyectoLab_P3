@@ -5,6 +5,7 @@ class Nintendo:public Consola{
 private:
 	string modelo;
 public:
+	Nintendo();
 	Nintendo(string,string,string,double,int);
 
 	void setModelo(string);

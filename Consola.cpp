@@ -2,6 +2,10 @@
 
 using namespace std;
 
+Consola::Consola(){
+	
+}
+
 Consola::Consola(string pEstado,string pSerie,double pPrecio,int pAno){
 	this->estado=pEstado;
 	this->serie=pSerie;

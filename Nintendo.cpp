@@ -1,5 +1,9 @@
 #include "Nintendo.h"
 
+
+Nintendo::Nintendo(){
+	
+}
 Nintendo::Nintendo(string pModelo,string pEstado,string pSerie,double pPrecio,int pAno):Consola(pEstado,pSerie,pPrecio,pAno){
 	this->modelo=pModelo;
 }

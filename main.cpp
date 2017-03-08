@@ -1,4 +1,7 @@
 #include "Includes.h"
+#include <fstream>
+#include <cstring>
+#include <typeinfo>
 
 using namespace std;
 
@@ -7,11 +10,61 @@ string getFecha();
 string getMicrosoft(int);
 string getSony(int);
 string getNintendo(int);
+int userOption(Usuario*);
 
 int main(){
-	cout<<getHora()<<endl;
-	cout<<getFecha()<<endl;
+	Usuario* admin=new Administrador("admin","admin");
+	vector<Consola*> consoles;
+	vector<Videojuego> games;
+	switch (userOption(admin)){
+		case 1:{
+			cout<<"Administrador";
+			break;
+		}
+		case 2:{
+			cout<<"Vendedor";
+			break;
+		}
+	}
 	return 0;
+}
+int userOption(Usuario* admin){
+	cout<<endl;
+	string usuario_name;
+	string password;
+	int opc;
+	bool cont=false;
+	do{
+		cout<<"1) Administrador\n"<< 
+			  "2) Vendedor\n"<< 
+			  "3) Salir\n"
+			  "Ingrese Opcion: ";
+		cin>>opc;
+		if(opc==1 || opc==2 || opc==3){
+			if(opc==1){
+				cout<<"Username: ";
+				cin>>usuario_name;
+				cout<<"Password: ";
+				cin>>password;
+				if(((static_cast<Administrador*>(admin))->getPassword())==password && admin->getNombre()==usuario_name){
+					return 1;
+				}else{
+					cout<<"Usuario incorrecto!"<<endl;
+				}
+			}else{
+				if(opc==2){
+					return 2;
+				}else{
+					return 3;
+				}
+			}
+			
+		}else{
+			cout<<"Opcion no encontrada\n¡Intente de nuevo!"<<endl;
+
+		}
+	}while(cont==false);
+
 }
 
 string getHora(){
