@@ -12,24 +12,24 @@ private:
 	int players;
 	string genero;
 	string estado;
-	string serie;
+	int serie;
 	double precio;
 
 public:
-	Videojuego(string,int,string,int,string,string,string,double);
+	Videojuego(string,int,string,int,string,string,int,double);
 	void setNombre(string);
 	void setAno(int);
 	void setConsola(string);
 	void setPlayers(int);
 	void setGenero(string);
 	void setEstado(string);
-	void setSerie(string);
+	void setSerie(int);
 	void setPrecio(double);
 	string getNombre();	
 	string getConsola();
 	string getGenero();
 	string getEstado();
-	string getSerie();
+	int getSerie();
 	int getAno();
 	int getPlayers();
 	double getPrecio();

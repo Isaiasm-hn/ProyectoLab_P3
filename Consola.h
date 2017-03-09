@@ -7,19 +7,19 @@ using namespace std;
 class Consola{
 private:
 	string estado;
-	string serie;
+	int serie;
 	double precio;
 	int ano;
 
 public:
 	//contructor
 	Consola();
-	Consola(string,string,double,int);
+	Consola(string,int,double,int);
 	
 	void setEstado(string);
 	string getEstado();
-	void setSerie(string);
-	string getSerie();
+	void setSerie(int);
+	int getSerie();
 	void setPrecio(double);
 	double getPrecio();
 	void setAno(int);

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Microsoft::Microsoft(string pModelo,string pEstado,string pSerie,double pPrecio,int pAno):Consola(pEstado,pSerie,pPrecio,pAno){
+Microsoft::Microsoft(string pModelo,string pEstado,int pSerie,double pPrecio,int pAno):Consola(pEstado,pSerie,pPrecio,pAno){
 	this->modelo=pModelo;
 }
 

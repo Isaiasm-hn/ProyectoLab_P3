@@ -4,7 +4,7 @@ class Ubisoftgame:Videojuego{
 private:
 	string creador;
 public:
-	Ubisoftgame(string,int,int,string,string,string,double);
+	Ubisoftgame(string,int,int,string,string,int,double);
 	string getCreador();
 	
 };

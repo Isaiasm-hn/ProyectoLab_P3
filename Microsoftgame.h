@@ -5,6 +5,6 @@ class Microsoftgame:public Videojuego{
 private:
 	string creador;
 public:
-	Microsoftgame(string,int,int,string,string,string,double);
+	Microsoftgame(string,int,int,string,string,int,double);
 	string getCreador();
 };

@@ -1,6 +1,6 @@
 #include "Videojuego.h"
 
-Videojuego::Videojuego(string pNombre,int pAno,string pConsola,int pPlayers,string pGenero,string pEstado,string pSerie,double pPrecio){
+Videojuego::Videojuego(string pNombre,int pAno,string pConsola,int pPlayers,string pGenero,string pEstado,int pSerie,double pPrecio){
 	this->nombre=pNombre;
 	this->ano=pAno;
 	this->consola=pConsola;
@@ -29,7 +29,7 @@ void Videojuego::setGenero(string x){
 void Videojuego::setEstado(string x){
 	this->estado=x;
 }
-void Videojuego::setSerie(string x){
+void Videojuego::setSerie(int x){
 	this->serie=x;
 }
 void Videojuego::setPrecio(double x){
@@ -47,7 +47,7 @@ string Videojuego::getGenero(){
 string Videojuego::getEstado(){
 	return estado;
 }
-string Videojuego::getSerie(){
+int Videojuego::getSerie(){
 	return serie;
 }
 int Videojuego::getAno(){

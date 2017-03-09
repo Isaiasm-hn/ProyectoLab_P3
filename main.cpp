@@ -18,14 +18,12 @@ int consolasOption();
 int modelosNintendo();
 int modelosSony();
 int modelosMicrosoft();
-int numSerie(vector<int>);
-string getSerie(string,int);
+bool validateSerie(vector<Consola*>,vector<Videojuego*>, int);
 
 int main(){
 	Usuario* admin=new Administrador("admin","admin");
 	vector<Consola*> consoles;
-	vector<Videojuego> games;
-	vector<int> series;
+	vector<Videojuego*> games;
 	int menu_principal=userOption(admin);
 	do{
 	switch (menu_principal){
@@ -35,9 +33,9 @@ int main(){
 			do{
 			switch(menu_admin){
 				case 1:{
-					string modelo, estado,serie;
+					string modelo, estado;
 					double precio;
-					int ano;
+					int ano,serie;
 					switch (consolasOption()){
 						case 1:{
 							modelo=getSony(modelosSony());
@@ -47,17 +45,19 @@ int main(){
 							cin>>precio;
 							cout<<"Ano: ";
 							cin>>ano;
-							int ser=numSerie(series);
-							series.push_back(ser);
-							serie=getSerie("SON",ser);
+							cout<<"Serie: ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie invalida!\n";
+								cout<<"Serie: ";
+								cin>>serie;
+							}
 							Consola* temp=new Sony(modelo,estado,serie,precio,ano);
 							consoles.push_back(temp);
 							delete temp;
-							cout<<consoles.at(0)->getSerie();
 							break;
 						}
 						case 2:{
-							
 							modelo=getNintendo(modelosNintendo());
 							cout<<"Estado: ";
 							cin>>estado;
@@ -65,9 +65,13 @@ int main(){
 							cin>>precio;
 							cout<<"Ano: ";
 							cin>>ano;
-							int ser=numSerie(series);
-							series.push_back(ser);
-							serie=getSerie("NIN",ser);
+							cout<<"Serie: ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie invalida!\n";
+								cout<<"Serie: ";
+								cin>>serie;
+							}
 							Consola* temp=new Nintendo(modelo,estado,serie,precio,ano);
 							delete temp;
 							consoles.push_back(temp);
@@ -81,9 +85,13 @@ int main(){
 							cin>>precio;
 							cout<<"Ano: ";
 							cin>>ano;
-							int ser=numSerie(series);
-							series.push_back(ser);
-							serie=getSerie("MIC",ser);
+							cout<<"Serie: ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie invalida!\n";
+								cout<<"Serie: ";
+								cin>>serie;
+							}
 							Consola* temp=new Microsoft(modelo,estado,serie,precio,ano);
 							delete temp;
 							consoles.push_back(temp);
@@ -109,26 +117,20 @@ int main(){
 	}while(menu_principal!=3);
 	return 0;
 }
-string getSerie(string cad, int num){
-	stringstream serie;
-	serie<<cad<<"-"<<num;
-	string retval=serie.str();
-	return retval;
-}
-int numSerie(vector<int> vec){
-	srand(time(NULL));
-	int num;
-	bool repetido=false;
-	do{
-		num=1+rand()%(10001-1);
-		for (int i = 0; i < vec.size(); ++i){
-			if(vec.at(i)==num){
-				repetido=true;
-			}
+bool validateSerie(vector<Consola*> vec,vector<Videojuego*> vec2, int serie){
+	for (int i = 0; i < vec.size(); ++i){
+		if(vec.at(i)->getSerie()==serie){
+			return false;
 		}
-	}while(repetido==true);
-	return num;
+	}
+	for (int i = 0; i < vec2.size(); ++i){
+		if(vec2.at(i)->getSerie()==serie){
+			return false;
+		}
+	}
+	return true;
 }
+
 int modelosMicrosoft(){
 	int opc;
 	do{

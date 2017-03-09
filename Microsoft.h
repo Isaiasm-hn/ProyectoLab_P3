@@ -7,7 +7,7 @@ class Microsoft: public Consola{
 private:
 	string modelo;
 public:
-	Microsoft(string,string,string,double,int);
+	Microsoft(string,string,int,double,int);
 	
 	void setModelo(string);
 	string getModelo();

@@ -6,7 +6,7 @@ Consola::Consola(){
 	
 }
 
-Consola::Consola(string pEstado,string pSerie,double pPrecio,int pAno){
+Consola::Consola(string pEstado,int pSerie,double pPrecio,int pAno){
 	this->estado=pEstado;
 	this->serie=pSerie;
 	this->precio=pPrecio;
@@ -21,10 +21,10 @@ void Consola::setEstado(string x){
 string Consola::getEstado(){
 	return estado;
 }
-void Consola::setSerie(string x){
+void Consola::setSerie(int x){
 	this->serie=x;
 }
-string Consola::getSerie(){
+int Consola::getSerie(){
 	return serie;
 }
 void Consola::setPrecio(double p){

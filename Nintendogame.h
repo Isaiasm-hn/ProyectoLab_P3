@@ -5,6 +5,6 @@ class Nintendogame:public Videojuego{
 private:
 	string creador;
 public:
-	Nintendogame(string,int,int,string,string,string,double);
+	Nintendogame(string,int,int,string,string,int,double);
 	string getCreador();	
 };
