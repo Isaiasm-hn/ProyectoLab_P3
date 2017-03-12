@@ -48,6 +48,8 @@ int getVideojuegos();
 int dealerOption();
 int ventaOption();
 void ListarConsolas(vector<Consola*>);
+int ventaGames();
+Videojuego* GameCopy(Videojuego*,string);
 
 
 
@@ -1160,12 +1162,133 @@ int main(){
 									break;
 								}
 								case 2:{//vender Videojuegos
+									switch(ventaGames()){
+										case 1:{
+											int cont=0;
+											for (int i = 0; i < games.size(); ++i){
+												if(i==0){
+													cout<<"  #    Nombre         Serie       Genero      Fabricante     Estado      Ano       Precio\n";
+												}
+												if(games.at(i)->getConsola()=="Sony" || games.at(i)->getConsola()=="All"){
+													cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+													games.at(i)->getGenero()<<" - "<<(static_cast<Ubisoftgame*>(games.at(i)))->getCreador()<<" - "<<
+													games.at(i)->getEstado()<<" - "<<games.at(i)->getAno()<<games.at(i)->getPrecio()<<endl;
+													cont++;
+												}
+											}
+											if(cont!=0){
+												cout<<"Ingrese El numero de Serie del Juego a Comprar: ";
+												int serie;
+												cin>>serie;
+												bool existe=false;
+												int pos;
+												for (int i = 0; i < games.size(); ++i){
+													if(games.at(i)->getSerie()==serie){
+														existe=true;
+														pos=i;
+													}
+												}
+												if(existe){
+													cliente->setVideoJuego(games.at(pos));
+													games.erase(games.begin()+pos);
+													cout<<"Video Juego agregado Existosamente!"<<endl;
+													/////////////////////////////////
+												}else{
+													cout<<"El numero de serie Ingresado no existe!\n";
+												}
 
+											}else{
+												cout<<"No hay Videojuegos en Inventario!\n";
+											}
+											break;
+										}
+										case 2:{
+											int cont=0;
+											for (int i = 0; i < games.size(); ++i){
+												if(i==0){
+													cout<<"  #    Nombre         Serie       Genero      Fabricante     Estado      Ano       Precio\n";
+												}
+												if(games.at(i)->getConsola()=="Nintendo" || games.at(i)->getConsola()=="All"){
+													cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+													games.at(i)->getGenero()<<" - "<<(static_cast<Ubisoftgame*>(games.at(i)))->getCreador()<<" - "<<
+													games.at(i)->getEstado()<<" - "<<games.at(i)->getAno()<<games.at(i)->getPrecio()<<endl;
+													cont++;
+												}
+											}
+											if(cont!=0){
+												cout<<"Ingrese El numero de Serie del Juego a Comprar: ";
+												int serie;
+												cin>>serie;
+												bool existe=false;
+												int pos;
+												for (int i = 0; i < games.size(); ++i){
+													if(games.at(i)->getSerie()==serie){
+														existe=true;
+														pos=i;
+													}
+												}
+												if(existe){
+													cliente->setVideoJuego(games.at(pos));
+													games.erase(games.begin()+pos);
+													cout<<"Video Juego agregado Existosamente!"<<endl;
+													/////////////////////////////////
+												}else{
+													cout<<"El numero de serie Ingresado no existe!\n";
+												}
+
+											}else{
+												cout<<"No hay Videojuegos en Inventario!\n";
+											}
+											break;
+										}
+										case 3:{
+											int cont=0;
+											for (int i = 0; i < games.size(); ++i){
+												if(i==0){
+													cout<<"  #    Nombre         Serie       Genero      Fabricante     Estado      Ano       Precio\n";
+												}
+												if(games.at(i)->getConsola()=="Microsoft" || games.at(i)->getConsola()=="All"){
+													cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+													games.at(i)->getGenero()<<" - "<<(static_cast<Ubisoftgame*>(games.at(i)))->getCreador()<<" - "<<
+													games.at(i)->getEstado()<<" - "<<games.at(i)->getAno()<<games.at(i)->getPrecio()<<endl;
+													cont++;
+												}
+											}
+											if(cont!=0){
+												cout<<"Ingrese El numero de Serie del Juego a Comprar: ";
+												int serie;
+												cin>>serie;
+												bool existe=false;
+												int pos;
+												for (int i = 0; i < games.size(); ++i){
+													if(games.at(i)->getSerie()==serie){
+														existe=true;
+														pos=i;
+													}
+												}
+												if(existe){
+													cliente->setVideoJuego(games.at(pos));
+													games.erase(games.begin()+pos);
+													cout<<"Video Juego agregado Existosamente!"<<endl;
+													/////////////////////////////////
+												}else{
+													cout<<"El numero de serie Ingresado no existe!\n";
+												}
+
+											}else{
+												cout<<"No hay Videojuegos en Inventario!\n";
+											}
+
+											break;
+										}
+										case 4:{
+											break;
+										}
+									}
 									break;
 								}
 								case 3:{//facturar
-									cout<<cliente->getSubTotal()<<endl;
-									cout<<cliente->getConsola().size();
+
 
 									fact=false;
 									break;
@@ -1195,6 +1318,26 @@ int main(){
 	}menu_principal=userOption(admin);
 	}while(menu_principal!=3);
 	return 0;
+}
+
+
+int ventaGames(){
+	int opc;
+	do{
+		cout<<"\n\n~.~.~.~VideoJuegos~.~.~.~\n";
+		cout<<"1) Sony\n"<<
+			  "2) Nintendo\n"<<
+			  "3) Microsoft\n"<<
+			  "4) Sony/Nintendo/Microsoft \n"<<
+			  "Ingrese opcion: ";
+		
+		cin>>opc;
+		if(opc<1 || opc>4){
+			cout<<"Opcion no valida! \n";
+		}else{
+			return opc;
+		}
+	}while(opc<1 || opc>4);
 }
 void ListarConsolas(vector<Consola*> consoles){
 	int xbox=0,xboxone=0,xbox360=0;
