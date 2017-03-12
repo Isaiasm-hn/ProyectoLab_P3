@@ -5,8 +5,8 @@ private:
 	string modelo;
 public:
 	Sony(string,string,int,double,int);
-	void setModelo(string);
-	string getModelo();
+	virtual void setModelo(string);
+	virtual string getModelo();
 	
 	
 };

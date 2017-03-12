@@ -17,22 +17,23 @@ private:
 
 public:
 	Videojuego(string,int,string,int,string,string,int,double);
-	void setNombre(string);
-	void setAno(int);
-	void setConsola(string);
-	void setPlayers(int);
-	void setGenero(string);
-	void setEstado(string);
-	void setSerie(int);
-	void setPrecio(double);
-	string getNombre();	
-	string getConsola();
-	string getGenero();
-	string getEstado();
-	int getSerie();
-	int getAno();
-	int getPlayers();
-	double getPrecio();
+	virtual void setNombre(string);
+	virtual void setAno(int);
+	virtual void setConsola(string);
+	virtual void setPlayers(int);
+	virtual void setGenero(string);
+	virtual void setEstado(string);
+	virtual void setSerie(int);
+	virtual void setPrecio(double);
+	virtual string getNombre();	
+	virtual string getConsola();
+	virtual string getGenero();
+	virtual string getEstado();
+	virtual int getSerie();
+	virtual int getAno();
+	virtual int getPlayers();
+	virtual double getPrecio();
+	
 
 
 

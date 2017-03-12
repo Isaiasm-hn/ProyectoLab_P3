@@ -8,8 +8,8 @@ public:
 	Nintendo();
 	Nintendo(string,string,int,double,int);
 
-	void setModelo(string);
-	string getModelo();
+	virtual void setModelo(string);
+	virtual string getModelo();
 	
 	
 };

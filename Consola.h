@@ -16,14 +16,15 @@ public:
 	Consola();
 	Consola(string,int,double,int);
 	
-	void setEstado(string);
-	string getEstado();
-	void setSerie(int);
-	int getSerie();
-	void setPrecio(double);
-	double getPrecio();
-	void setAno(int);
-	int getAno();
+	virtual void setEstado(string);
+	virtual string getEstado();
+	virtual void setSerie(int);
+	virtual int getSerie();
+	virtual void setPrecio(double);
+	virtual double getPrecio();
+	virtual void setAno(int);
+	virtual int getAno();
+	virtual string getModelo();
 
 
 	

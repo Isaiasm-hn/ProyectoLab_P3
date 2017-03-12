@@ -1,9 +1,34 @@
-#include "Includes.h"
+#include "Consola.h"
+#include "Microsoft.h"
+#include "Sony.h"
+#include "Nintendo.h"
+#include "Usuario.h"
+#include "Administrador.h"
+#include "Vendedor.h"
+#include "Videojuego.h"
+#include "Microsoft.h"
+#include "Microsoftgame.h"
+#include "Nintendogame.h"
+#include "Sonygame.h"
+#include "Bandaigame.h"
+#include "Konamigame.h"
+#include "SquareEnixgame.h"
+#include "ElectronicArtgame.h"
+#include "Segagame.h"
+#include "Ubisoftgame.h"
+#include <ctime>
+#include <vector>
+#include <sstream>
+#include <iostream>
+#include <string>
+#include "DataBase.h"
 #include <fstream>
 #include <cstring>
 #include <typeinfo>
 #include <stdlib.h>
 #include <time.h>
+#include "Venta.h"
+
 
 using namespace std;
 
@@ -19,25 +44,37 @@ int modelosNintendo();
 int modelosSony();
 int modelosMicrosoft();
 bool validateSerie(vector<Consola*>,vector<Videojuego*>, int);
+int getVideojuegos();
+int dealerOption();
+int ventaOption();
+void ListarConsolas(vector<Consola*>);
+
+
+
 
 int main(){
 	Usuario* admin=new Administrador("admin","admin");
 	vector<Consola*> consoles;
 	vector<Videojuego*> games;
+	
+
 	int menu_principal=userOption(admin);
+
 	do{
 	switch (menu_principal){
 		case 1:{
-			cout<<"----------Administrador----------\n";
+			cin.ignore();
 			int menu_admin=menuAdmin();
-			do{
+			bool cont=true;
+			while(menu_admin!=9){
 			switch(menu_admin){
 				case 1:{
 					string modelo, estado;
 					double precio;
 					int ano,serie;
-					switch (consolasOption()){
+					switch (consolasOption()){//Inicio agregar Consolas
 						case 1:{
+							cin.ignore();
 							modelo=getSony(modelosSony());
 							cout<<"Estado: ";
 							cin>>estado;
@@ -54,10 +91,11 @@ int main(){
 							}
 							Consola* temp=new Sony(modelo,estado,serie,precio,ano);
 							consoles.push_back(temp);
-							delete temp;
+							
 							break;
 						}
 						case 2:{
+							cin.ignore();
 							modelo=getNintendo(modelosNintendo());
 							cout<<"Estado: ";
 							cin>>estado;
@@ -73,12 +111,14 @@ int main(){
 								cin>>serie;
 							}
 							Consola* temp=new Nintendo(modelo,estado,serie,precio,ano);
-							delete temp;
+							
 							consoles.push_back(temp);
 							break;
 						}
 						case 3:{
+							cin.ignore();
 							modelo=getMicrosoft(modelosMicrosoft());
+							cout<<modelo;
 							cout<<"Estado: ";
 							cin>>estado;
 							cout<<"Precio: ";
@@ -93,30 +133,1121 @@ int main(){
 								cin>>serie;
 							}
 							Consola* temp=new Microsoft(modelo,estado,serie,precio,ano);
-							delete temp;
+							
 							consoles.push_back(temp);
 							break;
+						}
+					}
+					break;
+				}//Fin agregar Consolas
+				case 2:{
+					cin.ignore();
+					string nombre,genero,estado;
+					int ano,players,serie;
+					double precio;
+					switch (getVideojuegos()){//inicio agregar Videojuegos
+						case 1:{
+							cout<<"Nombre: ";
+							cin.ignore();
+							getline(cin,nombre);
+							cout<<"Ano: ";
+							cin>>ano;
+							cout<<"Jugadores: ";
+							cin>>players;
+							cout<<"Genero: ";
+							cin>>genero;
+							cout<<"Estado: ";
+							cin>>estado;
+							cout<<"Serie: ";
+							cin>>serie;
+								while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie invalida!\n";
+								cout<<"Serie: ";
+								cin>>serie;
+							}
+							cout<<"Precio: ";
+							cin>>precio;
+							Videojuego* temp=new Microsoftgame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							break;
+						}
+						case 2:{
+							cout<<"Nombre: ";
+							cin.ignore();
+							getline(cin,nombre);
+							cout<<"Ano: ";
+							cin>>ano;
+							cout<<"Jugadores: ";
+							cin>>players;
+							cout<<"Genero: ";
+							cin>>genero;
+							cout<<"Estado: ";
+							cin>>estado;
+							cout<<"Serie: ";
+							cin>>serie;
+								while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie invalida!\n";
+								cout<<"Serie: ";
+								cin>>serie;
+							}
+							cout<<"Precio: ";
+							cin>>precio;
+							Videojuego* temp=new Sonygame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							break;
+						}
+						case 3:{
+							cout<<"Nombre: ";
+							cin.ignore();
+							getline(cin,nombre);
+							cout<<"Ano: ";
+							cin>>ano;
+							cout<<"Jugadores: ";
+							cin>>players;
+							cout<<"Genero: ";
+							cin>>genero;
+							cout<<"Estado: ";
+							cin>>estado;
+							cout<<"Serie: ";
+							cin>>serie;
+								while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie invalida!\n";
+								cout<<"Serie: ";
+								cin>>serie;
+							}
+							cout<<"Precio: ";
+							cin>>precio;
+							Videojuego* temp=new Nintendogame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							break;
+						}
+						case 4:{
+							cout<<"Nombre: ";
+							cin.ignore();
+							getline(cin,nombre);
+							cout<<"Ano: ";
+							cin>>ano;
+							cout<<"Jugadores: ";
+							cin>>players;
+							cout<<"Genero: ";
+							cin>>genero;
+							cout<<"Estado: ";
+							cin>>estado;
+							cout<<"Serie: ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie invalida!\n";
+								cout<<"Serie: ";
+								cin>>serie;
+							}
+							cout<<"Precio: ";
+							cin>>precio;
+							Videojuego* temp=new Bandaigame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							break;
+						}
+						case 5:{
+							cout<<"Nombre: ";
+							cin.ignore();
+							getline(cin,nombre);
+							cout<<"Ano: ";
+							cin>>ano;
+							cout<<"Jugadores: ";
+							cin>>players;
+							cout<<"Genero: ";
+							cin>>genero;
+							cout<<"Estado: ";
+							cin>>estado;
+							cout<<"Serie: ";
+							cin>>serie;
+								while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie invalida!\n";
+								cout<<"Serie: ";
+								cin>>serie;
+							}
+							cout<<"Precio: ";
+							cin>>precio;
+							Videojuego* temp=new Konamigame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							break;
+						}
+						case 6:{
+							cout<<"Nombre: ";
+							cin.ignore();
+							getline(cin,nombre);
+							cout<<"Ano: ";
+							cin>>ano;
+							cout<<"Jugadores: ";
+							cin>>players;
+							cout<<"Genero: ";
+							cin>>genero;
+							cout<<"Estado: ";
+							cin>>estado;
+							cout<<"Serie: ";
+							cin>>serie;
+								while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie invalida!\n";
+								cout<<"Serie: ";
+								cin>>serie;
+							}
+							cout<<"Precio: ";
+							cin>>precio;
+							Videojuego* temp=new SquareEnixgame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							break;
+						}
+						case 7:{
+							cout<<"Nombre: ";
+							cin.ignore();
+							getline(cin,nombre);
+							cout<<"Ano: ";
+							cin>>ano;
+							cout<<"Jugadores: ";
+							cin>>players;
+							cout<<"Genero: ";
+							cin>>genero;
+							cout<<"Estado: ";
+							cin>>estado;
+							cout<<"Serie: ";
+							cin>>serie;
+								while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie invalida!\n";
+								cout<<"Serie: ";
+								cin>>serie;
+							}
+							cout<<"Precio: ";
+							cin>>precio;
+							Videojuego* temp=new ElectronicArtgame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+						
+							break;
+						}
+						case 8:{
+							cout<<"Nombre: ";
+							cin.ignore();
+							getline(cin,nombre);;
+							cout<<"Ano: ";
+							cin>>ano;
+							cout<<"Jugadores: ";
+							cin>>players;
+							cout<<"Genero: ";
+							cin>>genero;
+							cout<<"Estado: ";
+							cin>>estado;
+							cout<<"Serie: ";
+							cin>>serie;
+								while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie invalida!\n";
+								cout<<"Serie: ";
+								cin>>serie;
+							}
+							cout<<"Precio: ";
+							cin>>precio;
+							Videojuego* temp=new Segagame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+						
+							break;
+						}
+						case 9:{
+							cout<<"Nombre: ";
+							cin.ignore();
+							getline(cin,nombre);
+							cout<<"Ano: ";
+							cin>>ano;
+							cout<<"Jugadores: ";
+							cin>>players;
+							cout<<"Genero: ";
+							cin>>genero;
+							cout<<"Estado: ";
+							cin>>estado;
+							cout<<"Serie: ";
+							cin>>serie;
+								while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie Duplicada!\n";
+								cout<<"Serie: ";
+								cin>>serie;
+							}
+							cout<<"Precio: ";
+							cin>>precio;
+							Videojuego* temp=new Ubisoftgame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							break;
+						}
+					}
+					break;
+				}//Fin agregar VideoJuegos
+				case 3:{//agregar consoloas por lote
+					cin.ignore();
+					int cant;
+					cout<<"Cantidad de consolas a agregar: ";
+					cin>>cant;
+					string modelo, estado;
+					double precio;
+					int ano,serie;
+					switch (consolasOption()){
+						case 1:{
+							cin.ignore();
+							modelo=getSony(modelosSony());
+							cout<<"Estado: ";
+							cin>>estado;
+							cout<<"Precio: ";
+							cin>>precio;
+							cout<<"Ano: ";
+							cin>>ano;
+							for (int i = 0; i < cant; ++i){
+								cout<<"Serie ("<<(i+1)<<"): ";
+								cin>>serie;
+								while(!validateSerie(consoles,games,serie)){
+									cout<<"Serie invalida!\n";
+									cout<<"Serie ("<<(i+1)<<"): ";
+									cin>>serie;
+								}
+								Consola* temp=new Sony(modelo,estado,serie,precio,ano);
+								consoles.push_back(temp);
+								
+							}
+							break;
+						}
+						case 2:{
+							modelo=getNintendo(modelosNintendo());
+							cout<<"Estado: ";
+							cin>>estado;
+							cout<<"Precio: ";
+							cin>>precio;
+							cout<<"Ano: ";
+							cin>>ano;
+							for (int i = 0; i < cant; ++i){
+								cout<<"Serie ("<<(i+1)<<"): ";
+								cin>>serie;
+								while(!validateSerie(consoles,games,serie)){
+									cout<<"Serie Duplicada!\n";
+									cout<<"Serie ("<<(i+1)<<"): ";
+									cin>>serie;
+								}
+								Consola* temp=new Nintendo(modelo,estado,serie,precio,ano);
+								consoles.push_back(temp);
+								
+							}
+							break;
+						}
+						case 3:{
+							cin.ignore();
+							modelo=getMicrosoft(modelosMicrosoft());
+							cout<<"Estado: ";
+							cin>>estado;
+							cout<<"Precio: ";
+							cin>>precio;
+							cout<<"Ano: ";
+							cin>>ano;
+							for (int i = 0; i < cant; ++i){
+								cout<<"Serie ("<<(i+1)<<"): ";
+								cin>>serie;
+								while(!validateSerie(consoles,games,serie)){
+									cout<<"Serie Duplicada!\n";
+									cout<<"Serie ("<<(i+1)<<"): ";
+									cin>>serie;
+								}
+								Consola* temp=new Microsoft(modelo,estado,serie,precio,ano);
+								consoles.push_back(temp);
+								
+							}
+						}
+					} 					
+					break;
+				}//fin agregar por lote consolas
+				case 4:{//INICIO AGREGAR VIDEOJUEGOS POR LOTE
+					cin.ignore();
+					int cant;
+					cout<<"Ingrese la cantidad del lote de VideoJuegos: ";
+					cin>>cant;
+					string nombre,genero,estado;
+					int ano,players,serie;
+					double precio;
+					cout<<"Nombre: ";
+					cin.ignore();
+					getline(cin,nombre);
+					cout<<"Ano: ";
+					cin>>ano;
+					cout<<"Jugadores: ";
+					cin>>players;
+					cout<<"Genero: ";
+					cin>>genero;
+					cout<<"Estado: ";
+					cin>>estado;
+					cout<<"Precio: ";
+					cin>>precio;
+					switch (getVideojuegos()){
+						case 1:{
+							for (int i = 0; i < cant; ++i){
+							cout<<"Serie ("<<(i+1)<<"): ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie Duplicada!0 ";
+								cout<<"Serie ("<<(i+1)<<"): ";
+								cin>>serie;
+							}
+							Videojuego* temp=new Microsoftgame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							}
+							break;
+							
+						}
+						case 2:{
+							cin.ignore();
+							for (int i = 0; i < cant; ++i){
+							cout<<"Serie ("<<(i+1)<<"): ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie Duplicada!0 ";
+								cout<<"Serie ("<<(i+1)<<"): ";
+								cin>>serie;
+							}
+							Videojuego* temp=new Sonygame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							}
+							break;
+						}
+						case 3:{
+							cin.ignore();
+							for (int i = 0; i < cant; ++i){
+							cout<<"Serie ("<<(i+1)<<"): ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie Duplicada!0 ";
+								cout<<"Serie ("<<(i+1)<<"): ";
+								cin>>serie;
+							}
+							Videojuego* temp=new Nintendogame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							}
+
+							break;
+						}
+						case 4:{
+							cin.ignore();
+							for (int i = 0; i < cant; ++i){
+							cout<<"Serie ("<<(i+1)<<"): ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie Duplicada!0 ";
+								cout<<"Serie ("<<(i+1)<<"): ";
+								cin>>serie;
+							}
+							Videojuego* temp=new Bandaigame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							}
+							break;
+						}
+						case 5:{
+							cin.ignore();
+							for (int i = 0; i < cant; ++i){
+							cout<<"Serie ("<<(i+1)<<"): ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie Duplicada!0 ";
+								cout<<"Serie ("<<(i+1)<<"): ";
+								cin>>serie;
+							}
+							Videojuego* temp=new Konamigame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							}
+							break;
+						}
+						case 6:{
+							for (int i = 0; i < cant; ++i){
+							cout<<"Serie ("<<(i+1)<<"): ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie Duplicada!0 ";
+								cout<<"Serie ("<<(i+1)<<"): ";
+								cin>>serie;
+							}
+							Videojuego* temp=new SquareEnixgame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							}
+							break;
+						}
+						case 7:{
+							cin.ignore();
+							for (int i = 0; i < cant; ++i){
+							cout<<"Serie ("<<(i+1)<<"): ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie Duplicada!0 ";
+								cout<<"Serie ("<<(i+1)<<"): ";
+								cin>>serie;
+							}
+							Videojuego* temp=new ElectronicArtgame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							}
+							break;
+						}
+						case 8:{
+							for (int i = 0; i < cant; ++i){
+							cout<<"Serie ("<<(i+1)<<"): ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie Duplicada!0 ";
+								cout<<"Serie ("<<(i+1)<<"): ";
+								cin>>serie;
+							}
+							Videojuego* temp=new Segagame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							}
+							break;
+						}
+						case 9:{
+							cin.ignore();
+							for (int i = 0; i < cant; ++i){
+							cout<<"Serie ("<<(i+1)<<"): ";
+							cin>>serie;
+							while(!validateSerie(consoles,games,serie)){
+								cout<<"Serie Duplicada!0 ";
+								cout<<"Serie ("<<(i+1)<<"): ";
+								cin>>serie;
+							}
+							Videojuego* temp=new Ubisoftgame(nombre,ano,players,genero,estado,serie,precio);
+							games.push_back(temp);
+							
+							}
+							break;
+						}
+						break;
+					}
+
+				}
+
+
+				
+				case 5:{//listar Consolas
+					switch (consolasOption()){
+						case 1:{
+							int cont=0;
+							cout<<"\n       Modelo    Invent    Ano    Precio    Estado\n";
+							for (int i = 0; i < consoles.size(); ++i){
+								string tipo=typeid(*consoles.at(i)).name();
+								if(tipo=="4Sony"){
+									cout<<(i+1)<<")- "<<(static_cast<Sony*>(consoles.at(i)))->getModelo()<<
+									" | "<<consoles.at(i)->getSerie()<<" | "<<consoles.at(i)->getAno()<<" | "<<consoles.at(i)->getPrecio()<<
+									" | "<<consoles.at(i)->getEstado()<<endl;
+									cont++;
+								}
+							}
+							if(cont!=0){
+								cout<<"Ingrese posicion a Eliminar: ";
+								int posdel;
+								cin>>posdel;
+								delete consoles.at(posdel-1);
+								consoles.erase(consoles.begin()+(posdel-1));
+							}else{
+								cout<<"No hay nada que borrar aqui!\n";
+							}
+							break;
+						}
+						case 2:{
+							int cont=0;
+							cout<<"\n       Modelo    Invent    Ano    Precio    Estado\n";
+							for (int i = 0; i < consoles.size(); ++i){
+								string tipo=typeid(*consoles.at(i)).name();
+								if(tipo=="8Nintendo"){
+									cout<<(i+1)<<")- "<<(static_cast<Sony*>(consoles.at(i)))->getModelo()<<
+									" | "<<consoles.at(i)->getSerie()<<" | "<<consoles.at(i)->getAno()<<" | "<<consoles.at(i)->getPrecio()<<
+									" | "<<consoles.at(i)->getEstado()<<endl;
+									cont++;
+								}
+							}
+							if(cont!=0){
+								cout<<"Ingrese posicion a Eliminar: ";
+								int posdel;
+								cin>>posdel;
+								delete consoles.at(posdel-1);
+								consoles.erase(consoles.begin()+(posdel-1));
+							}else{
+								cout<<"No hay nada que borrar aqui!\n";
+							}
+
+							break;
+						}
+						case 3:{
+							cont=0;
+							cout<<"\n       Modelo    Invent    Ano    Precio    Estado\n";
+							for (int i = 0; i < consoles.size(); ++i){
+								string tipo=typeid(*consoles.at(i)).name();
+								if(tipo=="9Microsoft"){
+									cout<<(i+1)<<")- "<<(static_cast<Sony*>(consoles.at(i)))->getModelo()<<
+									" | "<<consoles.at(i)->getSerie()<<" | "<<consoles.at(i)->getAno()<<" | "<<consoles.at(i)->getPrecio()<<
+									" | "<<consoles.at(i)->getEstado()<<endl;
+									cont++;
+								}
+							}
+							if(cont!=0){
+								cout<<"Ingrese posicion a Eliminar: ";
+								int posdel;
+								cin>>posdel;
+								delete consoles.at(posdel-1);
+								consoles.erase(consoles.begin()+(posdel-1));
+							}else{
+								cout<<"No hay nada que borrar aqui!\n";
+							}
+
 							break;
 						}
 					}
 					break;
 				}
-			}menu_admin=menuAdmin();
-		}while(menu_admin!=7);
+				case 6:{//Eliminar Videojuegos
+					switch (getVideojuegos()){
+						case 1:{
+							int cont=0;
+							for (int i = 0; i < games.size(); ++i){
+								string tipo;
+								tipo=typeid(*games.at(i)).name();
+								if(tipo=="13Microsoftgame"){
+									cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+									games.at(i)->getGenero()<<" - "<<(static_cast<Microsoftgame*>(games.at(i)))->getCreador()<<" - "<<
+									games.at(i)->getConsola()<<" - "<<games.at(i)->getAno()<<endl;
+									cont++;
+								}
+								
+							}
+							if(cont!=0){
+								cout<<"Ingrese posicion a Eliminar: ";
+								int posdel;
+								cin>>posdel;
+								delete games.at(posdel-1);
+								games.erase(games.begin()+(posdel-1));
+							}else{
+								cout<<"No hay nada que borrar aqui!"<<endl;
+							}
+
+							break;
+						}
+						case 2:{
+							int cont=0;
+							for (int i = 0; i < games.size(); ++i){
+							string tipo;
+							tipo=typeid(*games.at(i)).name();
+								if(tipo=="8Sonygame"){
+									cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+									games.at(i)->getGenero()<<" - "<<(static_cast<Sonygame*>(games.at(i)))->getCreador()<<" - "<<
+									games.at(i)->getConsola()<<" - "<<games.at(i)->getAno()<<endl;
+									cont++;
+								}
+							}
+							if(cont!=0){
+								cout<<"Ingrese posicion a Eliminar: ";
+								int posdel;
+								cin>>posdel;
+								delete games.at(posdel-1);
+								games.erase(games.begin()+(posdel-1));
+							}else{
+								cout<<"No hay nada que borrar aqui!"<<endl;
+							}
+
+							break;
+						}
+						case 3:{
+
+							int cont=0;
+							for (int i = 0; i < games.size(); ++i){
+							string tipo;
+							tipo=typeid(*games.at(i)).name();
+							if(tipo=="11Nintendogame"){
+									cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+									games.at(i)->getGenero()<<" - "<<(static_cast<Nintendogame*>(games.at(i)))->getCreador()<<" - "<<
+									games.at(i)->getConsola()<<" - "<<games.at(i)->getAno()<<endl;
+									cont++;
+								}
+								
+							}
+							if(cont!=0){
+								cout<<"Ingrese posicion a Eliminar: ";
+								int posdel;
+								cin>>posdel;
+								delete games.at(posdel-1);
+								games.erase(games.begin()+(posdel-1));
+							}else{
+								cout<<"No hay nada que borrar aqui!"<<endl;
+							}
+
+							break;
+						}
+						case 4:{
+							int cont=0;
+							for (int i = 0; i < games.size(); ++i){
+							string tipo;
+							tipo=typeid(*games.at(i)).name();
+							if(tipo=="10Bandaigame"){
+									cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+									games.at(i)->getGenero()<<" - "<<(static_cast<Bandaigame*>(games.at(i)))->getCreador()<<" - "<<
+									games.at(i)->getConsola()<<" - "<<games.at(i)->getAno()<<endl;
+									cont++;
+								}
+								
+							}
+							if(cont!=0){
+								cout<<"Ingrese posicion a Eliminar: ";
+								int posdel;
+								cin>>posdel;
+								delete games.at(posdel-1);
+								games.erase(games.begin()+(posdel-1));
+							}else{
+								cout<<"No hay nada que borrar aqui!"<<endl;
+							}
+						}
+						case 5:{
+							int cont=0;
+							for (int i = 0; i < games.size(); ++i){
+							string tipo;
+							tipo=typeid(*games.at(i)).name();
+							if(tipo=="10Konamigame"){
+									cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+									games.at(i)->getGenero()<<" - "<<(static_cast<Konamigame*>(games.at(i)))->getCreador()<<" - "<<
+									games.at(i)->getConsola()<<" - "<<games.at(i)->getAno()<<endl;
+									cont++;
+								}
+								
+							}
+							if(cont!=0){
+								cout<<"Ingrese posicion a Eliminar: ";
+								int posdel;
+								cin>>posdel;
+								delete games.at(posdel-1);
+								games.erase(games.begin()+(posdel-1));
+							}else{
+								cout<<"No hay nada que borrar aqui!"<<endl;
+							}
+							break;
+						}
+						case 6:{
+							int cont=0;
+							for (int i = 0; i < games.size(); ++i){
+							string tipo;
+							tipo=typeid(*games.at(i)).name();
+							if(tipo=="14SquareEnixgame"){
+									cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+									games.at(i)->getGenero()<<" - "<<(static_cast<SquareEnixgame*>(games.at(i)))->getCreador()<<" - "<<
+									games.at(i)->getConsola()<<" - "<<games.at(i)->getAno()<<endl;
+									cont++;
+								}
+								
+							}
+							if(cont!=0){
+								cout<<"Ingrese posicion a Eliminar: ";
+								int posdel;
+								cin>>posdel;
+								delete games.at(posdel-1);
+								games.erase(games.begin()+(posdel-1));
+							}else{
+								cout<<"No hay nada que borrar aqui!"<<endl;
+							}
+
+							break;
+						}
+						case 7:{
+							int cont=0;
+							for (int i = 0; i < games.size(); ++i){
+							string tipo;
+							tipo=typeid(*games.at(i)).name();
+							if(tipo=="17ElectronicArtgame"){
+									cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+									games.at(i)->getGenero()<<" - "<<(static_cast<ElectronicArtgame*>(games.at(i)))->getCreador()<<" - "<<
+									games.at(i)->getConsola()<<" - "<<games.at(i)->getAno()<<endl;
+									cont++;
+								}
+								
+							}
+							if(cont!=0){
+								cout<<"Ingrese posicion a Eliminar: ";
+								int posdel;
+								cin>>posdel;
+								delete games.at(posdel-1);
+								games.erase(games.begin()+(posdel-1));
+							}else{
+								cout<<"No hay nada que borrar aqui!"<<endl;
+							}
+
+							break;
+						}
+						case 8:{
+							int cont=0;
+							for (int i = 0; i < games.size(); ++i){
+							string tipo;
+							tipo=typeid(*games.at(i)).name();
+							if(tipo=="8Segagame"){
+									cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+									games.at(i)->getGenero()<<" - "<<(static_cast<Segagame*>(games.at(i)))->getCreador()<<" - "<<
+									games.at(i)->getConsola()<<" - "<<games.at(i)->getAno()<<endl;
+									cont++;
+								}
+								
+							}
+							if(cont!=0){
+								cout<<"Ingrese posicion a Eliminar: ";
+								int posdel;
+								cin>>posdel;
+								delete games.at(posdel-1);
+								games.erase(games.begin()+(posdel-1));
+							}else{
+								cout<<"No hay nada que borrar aqui!"<<endl;
+							}
+
+							break;
+						}
+						case 9:{
+							int cont=0;
+							for (int i = 0; i < games.size(); ++i){
+							string tipo;
+							tipo=typeid(*games.at(i)).name();
+							if(tipo=="11Ubisoftgame"){
+									cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+									games.at(i)->getGenero()<<" - "<<(static_cast<Ubisoftgame*>(games.at(i)))->getCreador()<<" - "<<
+									games.at(i)->getConsola()<<" - "<<games.at(i)->getAno()<<endl;
+									cont++;
+								}
+								
+							}
+							if(cont!=0){
+								cout<<"Ingrese posicion a Eliminar: ";
+								int posdel;
+								cin>>posdel;
+								delete games.at(posdel-1);
+								games.erase(games.begin()+(posdel-1));
+							}else{
+								cout<<"No hay nada que borrar aqui!"<<endl;
+							}
+							break;
+						}
+
+					}
+					
+				}
+				case 7:{//cantidad de Consolas
+					ListarConsolas(consoles);
+ 					break;
+				}
+				case 8:{//Modificar VideoJuegos
+					for (int i = 0; i < games.size(); ++i){
+						cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
+						games.at(i)->getGenero()<<" - "<<(static_cast<Segagame*>(games.at(i)))->getCreador()<<" - "<<
+						games.at(i)->getConsola()<<" - "<<games.at(i)->getAno()<<endl;
+					}int pos;
+					 if(games.size()>0){
+					 	cout<<"Ingrese Posicion a Modificar Nombre: ";
+					 	cin>>pos;
+					 	pos=pos-1;
+					 	while(pos<0 || pos>games.size()){
+					 		cout<<"Posicion Invalida Ingrese una posicion valida!";
+					 		cout<<"Ingrese Posicion a Modificar Nombre: ";
+					 		cin>>pos;
+					 	}
+					 	string n_nombre;
+						cout<<"Ingrese nuevo nombre: ";
+					    cin.ignore();
+					    getline(cin,n_nombre);
+					    games.at(pos)->setNombre(n_nombre);
+					    cout<<"Nombre modificado Exitosamente!"<<endl;
+
+					 }else{
+					 	cout<<"No hay Ningun Video Juego que Modificar!\n";
+					 }
+					
+					 
+
+					break;
+				}
+				default:{
+					
+					break;
+				}
+
+			}
+			menu_admin=menuAdmin();
+		}
 			break;
 		}
 		case 2:{
-			cout<<"------------Vendedor-------------\n";
+			cout<<"\n------------Vendedor-------------\n\n";
+			cout<<"Nombre Vendedor: ";
+			string nombre;
+			cin.ignore();
+			getline(cin,nombre);
+			Vendedor* dealer= new Vendedor(nombre);
+			(static_cast<Vendedor*>(dealer))->setEntrada();
+			int deal=dealerOption();
+			while(deal!=3){
+				switch (deal){
+					case 1:{
+						bool cont=true;
+						while (cont){
+							string c_nombre;
+							cout<<"Nombre del Cliente: ";
+							cin.ignore();
+							getline(cin,c_nombre);
+							Venta* venta=new Venta(c_nombre);
+							int opc=ventaOption();
+							switch (opc){
+								case 1:{
+									bool add_c=true;
+									while(add_c){
+										switch(consolasOption()){
+											case 1:{
+												bool c=true;
+												while(c){
+													cout<<"Consolas Sony Disponible\n";
+													cout<<"Serie        Modelo          Precio\n";
+													for (int i = 0; i < consoles.size(); ++i){
+														string tipo=typeid(*consoles.at(i)).name();
+													
+														if(tipo=="4Sony"){
+															cout<<"   "<<consoles.at(i)->getSerie()<<"  -  "<<(static_cast<Sony*>(consoles.at(i)))->getModelo()<<"  -  "<<
+															consoles.at(i)->getPrecio()<<endl;
+														}	
+													}
+													int serie;
+													cout<<"\nIngrese serie de Consola a Vender: ";
+													cin>>serie;
+													for (int i = 0; i < consoles.size(); ++i){	
+														if(serie==consoles.at(i)->getSerie()){
+															venta->setConsola(consoles.at(i));
+														}
+													}
+													cout<<"Desea Agregar otra Consola[s/n]: ";
+													char opc;
+													cin>>opc;
+													if(opc!='s' || opc!='S'){
+													c=false;
+													}
+												}
+												break;
+											}
+											case 2:{
+
+												break;
+											}
+											case 3:{
+
+												break;
+											}
+										}
+										
+									}
+
+									break;
+								}
+								case 2:{
+
+									break;
+								}
+							}
+					    }
+
+						break;
+					}
+					case 2:{
+
+						break;
+					}
+				}
+
+			}
 			break;
 		}
-		case 3:{
+		default:{
 			cout<<"------Saliendo del Sistema-------\n";
 			break;
 		}
-	}
+	}menu_principal=userOption(admin);
 	}while(menu_principal!=3);
 	return 0;
 }
+void ListarConsolas(vector<Consola*> consoles){
+	int xbox=0,xboxone=0,xbox360=0;
+					int ps1=0,ps2=0,ps3=0,ps4=0,psp=0,psv=0;
+					int nes=0,snes=0,n64=0,ng=0,nw=0,nwu=0,ns=0,gb=0,gc=0,ga=0,nds=0,ndsi=0,n3ds=0,nn3ds=0;
+					for (int i = 0; i < consoles.size(); ++i){
+						string tipo=typeid(*consoles.at(i)).name();
+						
+						if(tipo=="9Microsoft"){
+							cout<<(static_cast<Sony*>(consoles.at(i)))<<endl;
+							if((static_cast<Sony*>(consoles.at(i)))->getModelo()=="xbox"){
+								xbox++;
+							}
+							if((static_cast<Sony*>(consoles.at(i)))->getModelo()=="xbox 360"){
+								xbox360++;
+							}
+							if((static_cast<Sony*>(consoles.at(i)))->getModelo()=="xbox One"){
+								xboxone++;
+							}
+							
+						}
+						if(tipo=="8Nintendo"){
+							cout<<(static_cast<Nintendo*>(consoles.at(i)))->getModelo()<<endl;
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Nintendo Entertainment System"){
+								nes++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Super Nintendo Entertainment System"){
+								snes++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Nintendo 64"){
+								n64++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Nintendo GameCube"){
+								ng++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Nintendo Wii"){
+								nw++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Nintendo Wii U"){
+								nwu++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Nitendo Switch"){
+								ns++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Gameboy"){
+								gb++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Gameboy Colors"){
+								gc++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Gameboy Advance"){
+								ga++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Nintendo DS"){
+								nds++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Nintendo DSi"){
+								ndsi++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Nintendo 3DS"){
+								n3ds++;
+							}
+							if((static_cast<Nintendo*>(consoles.at(i)))->getModelo()=="Nintendo New 3DS"){
+								nn3ds++;
+							}
+						}
+
+						if(tipo=="4Sony"){
+							cout<<(static_cast<Sony*>(consoles.at(i)))<<endl;
+							if((static_cast<Microsoft*>(consoles.at(i)))->getModelo()=="Play Station 1"){
+								ps1++;				
+							}
+							if((static_cast<Microsoft*>(consoles.at(i)))->getModelo()=="Play Station 2"){
+								ps2++;
+							}
+							if((static_cast<Microsoft*>(consoles.at(i)))->getModelo()=="Play Station 3"){
+								ps3++;
+							}
+							if((static_cast<Microsoft*>(consoles.at(i)))->getModelo()=="Play Station 4"){
+								ps4++;
+							}
+							if((static_cast<Microsoft*>(consoles.at(i)))->getModelo()=="PSP"){
+								psp++;
+							}
+							if((static_cast<Microsoft*>(consoles.at(i)))->getModelo()=="PS Vita"){
+								psv++;
+							}
+
+						}
+					}
+					cout<<"Cantidad De Consolas Disponibles en Inventario\n"<<
+						  "Modelo                                 Cant.\n"<<
+						  " xbox                                  "<<xbox  <<endl<<
+						  " xbox 360                              "<<xboxone  <<endl<<
+						  " xbox One                              "<<xbox360  <<endl<<
+						  " Play Station 1                        "<<ps1  <<endl<<
+						  " Play Station 2                        "<<ps2  <<endl<<
+						  " Play Starion 3                        "<<ps3  <<endl<<
+						  " Play Station 4                        "<<ps4  <<endl<<
+						  " PSP                                   "<< psp <<endl<<
+						  " PS Vita                               "<< psv <<endl<<
+						  " Nintendo Entertainment System         "<< nes <<endl<<
+						  " Super Nintendo Entertainment System   "<< snes <<endl<<
+						  " Nintendo 64                           "<< n64 <<endl<<
+						  " Nintendo GameCube                     "<< ng <<endl<<
+						  " Nintendo Wii                          "<< nw <<endl<<
+						  " Nintendo Wii U                        "<< nwu <<endl<<
+						  " Nitendo Switch                        "<< ns <<endl<<
+						  " Gameboy                               "<< gb <<endl<<
+						  " Gameboy Colors                        "<< gc <<endl<<
+						  " Gameboy Advance                       "<< ga <<endl<<
+						  " Nintendo DS                           "<< nds <<endl<<
+						  " Nintendo DSi                          "<< ndsi <<endl<<
+						  " Nintendo 3DS                          "<< n3ds <<endl<<
+						  " Nintendo New 3DS                      "<< nn3ds <<endl;
+						
+}
+
+int ventaOption(){
+	int retval;
+	do{
+	cout<<"1)- Consolas\n"<<
+		  "2)- VideoJuego\n"<<
+		  "Ingrese Opcion: ";
+	cin>>retval;
+	if(retval<1 || retval>2){
+		cout<<"Opcion Invalida!\n";
+	}else{
+		return retval;
+	}
+	}while(retval<1 || retval>2);
+}
+
+
+int getVideojuegos(){
+	int x;
+	do{
+		cout<<"\n\n-------VideoJuegos--------\n";
+		cout<<"1) Microsoft\n"<<
+		  "2) Sony\n"<<
+		  "3) Nintendo\n"<<
+		  "4) Bandai\n"<<
+		  "5) Konami\n"<<
+		  "6) Square Enix\n"<<
+		  "7) Electronic Arts\n"<<
+		  "8) Sega\n"<<
+		  "9) Ubisoft\n"<<
+		  "Ingrese Opcion:";
+		  cin>>x;
+		  if(x<1 || x>9){
+		  	cout<<"Opcion no encontrada!";
+		  }else{
+		  	return x;
+		  }
+	}while(x<1 || x>9);
+
+
+}
+int dealerOption(){
+	int retval;
+	do{
+	cout<<"1)- Vender\n"<<
+		  "2)- Agregar a Inventario\n"<<
+		  "3)- Salir de Vendedor\n"<<
+		  "Ingrese Opcion: ";
+	cin>>retval;
+	if(retval<1 || retval>3){
+		cout<<"Opcion Invalida!\n";
+	}else{
+		return retval;
+	}
+	}while(retval<1 || retval>3);
+}
+
 bool validateSerie(vector<Consola*> vec,vector<Videojuego*> vec2, int serie){
 	for (int i = 0; i < vec.size(); ++i){
 		if(vec.at(i)->getSerie()==serie){
@@ -212,21 +1343,24 @@ int consolasOption(){
 int menuAdmin(){
 	int opc;
 	do{
+		cout<<endl<<"~.~.~.~.Administrador~.~.~.~.~.\n";
 		cout<<"1) Agregar Consola\n"<<
 		 	  "2) Agregar VideoJuegos\n"<<
-		  	  "3) Listar Consolas\n"<<
-		 	  "4) Listar VideoJuegos\n"<<
-		      "5) Eliminar Consolas\n"<<
+		  	  "3) Agregar lote Consolas\n"<<
+		 	  "4) Agregar lote VideoJuegos\n"<<
+		      "5) Eliminar Consola\n"<<
 		      "6) Eliminar VideoJuegos\n"<<
-		      "7) Salir de Administrador\n"<<
+		      "7) Cantidad de Consolas\n"<<
+		      "8) Modificar VideoJuegos\n"<<
+		      "9) Salir de Administrador\n"<<
 		      "Ingrese Opcion: ";
 		cin>>opc;
-	 	if(opc<1 || opc>7){
+	 	if(opc<1 || opc>9){
 	   		cout<<"Opcion no encontrada!\n";
 	 	}else{
 	 		return opc;
 	 	}
-	}while(opc<1 || opc>7);
+	}while(opc<1 || opc>9);
 
 
 }
@@ -246,8 +1380,10 @@ int userOption(Usuario* admin){
 			if(opc==1){
 				cout<<"\n----Login----\n";
 				cout<<"Username: ";
+				cin.ignore();
 				cin>>usuario_name;
 				cout<<"Password: ";
+				cin.ignore();
 				cin>>password;
 				if(((static_cast<Administrador*>(admin))->getPassword())==password && admin->getNombre()==usuario_name){
 					return 1;
@@ -278,6 +1414,7 @@ string getHora(){
 	string hora=hour.str();
 	return hora;
 }
+
 string getFecha(){
 	time_t t_sis = time(0);
 	tm * time = localtime(&t_sis);
@@ -287,6 +1424,7 @@ string getFecha(){
 	string date=fecha.str();
 	return date;
 }
+
 string getMicrosoft(int n){
 	switch (n){
 		case 1: 

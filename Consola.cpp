@@ -40,3 +40,7 @@ int Consola::getAno(){
 	return ano;
 }
 
+string Consola::getModelo(){
+	return "";
+}
+

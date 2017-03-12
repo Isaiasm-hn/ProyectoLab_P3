@@ -1,6 +1,6 @@
 #include "Videojuego.h"
 
-class Ubisoftgame:Videojuego{
+class Ubisoftgame:public Videojuego{
 private:
 	string creador;
 public:
