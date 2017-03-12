@@ -990,6 +990,8 @@ int main(){
 			cin.ignore();
 			getline(cin,nombre);
 			Vendedor* dealer= new Vendedor(nombre);
+			double dinero=0;
+			int objetos;
 			(static_cast<Vendedor*>(dealer))->setEntrada();
 			int deal=dealerOption();
 			while(deal!=3){
@@ -1047,7 +1049,9 @@ int main(){
 													cliente->setSubTotal(precio);
 													delete consoles.at(pos);
 													consoles.erase(consoles.begin()+pos);
+													
 													cout<<"Consola agregada a lista!\n";
+
 												}else{
 													cout<<"Numero de Serie no existe!\n";
 												}
@@ -1149,6 +1153,7 @@ int main(){
 													cliente->setSubTotal(precio);
 													delete consoles.at(pos);
 													consoles.erase(consoles.begin()+pos);
+													
 													cout<<"Consola agregada a lista!\n";
 												}else{
 													cout<<"Numero de Serie no existe!\n";
@@ -1189,8 +1194,10 @@ int main(){
 													}
 												}
 												if(existe){
+												
 													cliente->setVideoJuego(games.at(pos));
 													games.erase(games.begin()+pos);
+
 													cout<<"Video Juego agregado Existosamente!"<<endl;
 													/////////////////////////////////
 												}else{
@@ -1228,6 +1235,7 @@ int main(){
 													}
 												}
 												if(existe){
+													
 													cliente->setVideoJuego(games.at(pos));
 													games.erase(games.begin()+pos);
 													cout<<"Video Juego agregado Existosamente!"<<endl;
@@ -1267,6 +1275,7 @@ int main(){
 													}
 												}
 												if(existe){
+													
 													cliente->setVideoJuego(games.at(pos));
 													games.erase(games.begin()+pos);
 													cout<<"Video Juego agregado Existosamente!"<<endl;
@@ -1288,7 +1297,38 @@ int main(){
 									break;
 								}
 								case 3:{//facturar
+									cliente->setHoraFinal(getHora());
+									stringstream nombre_a;
+									nombre_a<<"./log_ventas/"<<cliente->getHoraFinal()<<"-"<<getFecha()<<".log";
 
+									stringstream factura_s;
+												 factura_s<<"             GAMEHUB             \n"<<
+														   "Fecha:          "<<getFecha()<<"\n"<<
+														   "Hora:           "<<cliente->getHoraFinal()<<"\n"<<
+														   "Vendedor: "<<dealer->getNombre()<<"\n"<<
+														   "Cliente:  "<<cliente->getNombre()<<"\n\n"<<
+
+														   "Cantidad Articulos "<<(cliente->getConsola().size()+cliente->getVideoJuego().size())<<"\n\n";
+
+														   for (int i = 0; i < cliente->getConsola().size(); ++i){
+														   		factura_s<<cliente->getConsola().at(i)->getModelo()<<"       "<<cliente->getConsola().at(i)->getPrecio()<<"\n";
+														   		objetos++;
+														   }
+														   for (int i = 0; i < cliente->getVideoJuego().size(); ++i){
+														   		factura_s<<cliente->getVideoJuego().at(i)->getNombre()<<"       "<<cliente->getVideoJuego().at(i)->getPrecio()<<"\n";
+														   		objetos++;
+														   }
+
+														   factura_s<<"\nSubTotal: "<<(cliente->getSubTotal());
+														   factura_s<<"\nImpuesto: "<<(cliente->getSubTotal()*0.15);
+														   factura_s<<"\nTotal:    "<<(cliente->getSubTotal())+(cliente->getSubTotal()*0.15)<<"\n";
+									dinero=(cliente->getSubTotal())+(cliente->getSubTotal()*0.15);
+									cout<<factura_s.str();
+									ofstream file;
+									string ruta=nombre_a.str();
+									file.open(ruta.c_str());
+									file<<factura_s.str();
+									file.close();
 
 									fact=false;
 									break;
@@ -1302,6 +1342,9 @@ int main(){
 
 						break;
 					}
+					case 3:{//salir
+						break;
+					}
 
 
 				}
@@ -1309,6 +1352,22 @@ int main(){
 
 				deal=dealerOption();
 			}
+			dealer->setSalida();
+			stringstream r2;
+			r2<<"./log_usuario/"<<dealer->getNombre()<<"-"<<getFecha()<<".log";
+			string ruta2=r2.str();
+			stringstream user;
+			user<<"            GAMEHUB\n"<<
+				  "Nombre:       "<<dealer->getNombre()<<"\n"<<
+				  "Hora Entrada: "<<dealer->getEntrada()<<"\n"<<
+				  "Hora Salida:  "<<dealer->getSalida()<<"\n\n"<<
+				  "Cant. Articulos Vendidos "<<objetos<<"\n"<<
+				  "Dinero Generado "<<dinero<<"\n";
+
+			ofstream file;
+			file.open(ruta2.c_str());
+			file<<user.str();
+			file.close();
 			break;
 		}
 		default:{
@@ -1675,7 +1734,7 @@ string getHora(){
 	time_t t_sis = time(0);
 	tm * time = localtime(&t_sis);
 	stringstream hour;
-	hour<<time->tm_hour<< ":" << time->tm_min << ":" << time->tm_sec;
+	hour<<time->tm_hour<< "_" << time->tm_min << "_" << time->tm_sec;
 	string hora=hour.str();
 	return hora;
 }
@@ -1685,7 +1744,7 @@ string getFecha(){
 	tm * time = localtime(&t_sis);
 	int year = 1900 + time->tm_year;
 	stringstream fecha;
-	fecha<<time->tm_mday<<"/"<<(time->tm_mon+1)<<"/"<<year;
+	fecha<<time->tm_mday<<"_"<<(time->tm_mon+1)<<"_"<<year;
 	string date=fecha.str();
 	return date;
 }
