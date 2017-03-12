@@ -3,6 +3,7 @@
 
 
 Venta::Venta(string pNombre){
+	subtotal=0;
 	this->nombre=pNombre;
 }
 void Venta::setNombre(string pNombre){
@@ -25,3 +26,22 @@ vector<Videojuego*> Venta::getVideoJuego(){
 	return games;
 }
 
+void Venta::setHoraFinal(string h){
+	this->hora_fin=h;
+}
+string Venta::getVendedor(){
+	return vendedor;
+}
+
+void Venta::setVendedor(string dealer){
+	this->vendedor=dealer;
+}
+string Venta::getHoraFinal(){
+	return hora_fin;
+}
+void Venta::setSubTotal(double sub){
+	this->subtotal+=sub;
+}
+double Venta::getSubTotal(){
+	return subtotal;
+}

@@ -12,6 +12,10 @@ private:
 	string nombre;
 	vector<Consola*> conso;
 	vector<Videojuego*> games;
+	string hora_fin;
+	string vendedor;
+	double subtotal;
+
 
 public:
 	Venta(string);
@@ -21,6 +25,12 @@ public:
 	vector<Consola*> getConsola();
 	void setVideoJuego(Videojuego*);
 	vector<Videojuego*> getVideoJuego();
+	void setHoraFinal(string);
+	string getHoraFinal();
+	void setVendedor(string);
+	string getVendedor();
+	void setSubTotal(double);
+	double getSubTotal();
 
 
 	

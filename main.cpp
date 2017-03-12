@@ -941,6 +941,7 @@ int main(){
  					break;
 				}
 				case 8:{//Modificar VideoJuegos
+
 					for (int i = 0; i < games.size(); ++i){
 						cout<<(i+1)<<") "<<games.at(i)->getNombre()<<" - "<<games.at(i)->getSerie()<<" - "<<
 						games.at(i)->getGenero()<<" - "<<(static_cast<Segagame*>(games.at(i)))->getCreador()<<" - "<<
@@ -991,79 +992,199 @@ int main(){
 			int deal=dealerOption();
 			while(deal!=3){
 				switch (deal){
-					case 1:{
-						bool cont=true;
-						while (cont){
-							string c_nombre;
-							cout<<"Nombre del Cliente: ";
-							cin.ignore();
-							getline(cin,c_nombre);
-							Venta* venta=new Venta(c_nombre);
-							int opc=ventaOption();
-							switch (opc){
-								case 1:{
-									bool add_c=true;
-									while(add_c){
-										switch(consolasOption()){
-											case 1:{
-												bool c=true;
-												while(c){
-													cout<<"Consolas Sony Disponible\n";
-													cout<<"Serie        Modelo          Precio\n";
-													for (int i = 0; i < consoles.size(); ++i){
-														string tipo=typeid(*consoles.at(i)).name();
-													
-														if(tipo=="4Sony"){
-															cout<<"   "<<consoles.at(i)->getSerie()<<"  -  "<<(static_cast<Sony*>(consoles.at(i)))->getModelo()<<"  -  "<<
-															consoles.at(i)->getPrecio()<<endl;
-														}	
-													}
-													int serie;
-													cout<<"\nIngrese serie de Consola a Vender: ";
-													cin>>serie;
-													for (int i = 0; i < consoles.size(); ++i){	
-														if(serie==consoles.at(i)->getSerie()){
-															venta->setConsola(consoles.at(i));
-														}
-													}
-													cout<<"Desea Agregar otra Consola[s/n]: ";
-													char opc;
-													cin>>opc;
-													if(opc!='s' || opc!='S'){
-													c=false;
+					case 1:{//Vender 
+						string nombre;
+						cout<<"Ingrese Nombre del Cliente: ";
+						cin.ignore();
+						getline(cin,nombre);
+						Venta* cliente=new Venta(nombre);
+						cliente->setVendedor(dealer->getNombre());
+						bool fact=true;
+						while(fact){
+							switch (ventaOption()){
+								case 1:{//vender consolas
+									switch(consolasOption()){
+										case 1:{//Sony
+											int cont;
+											for (int i = 0; i < consoles.size(); ++i){
+												if(i==0){
+													cout<<" #       Modelo         Serie        Ano      Estado       Precio\n";
+												}
+												string tipo=typeid(*consoles.at(i)).name();
+												if(tipo=="4Sony"){
+													cout<<(i+1)<<")- "<<(static_cast<Sony*>(consoles.at(i)))->getModelo()<<
+													"          "<<consoles.at(i)->getSerie()<<"        "<<consoles.at(i)->getAno()<<"   "<<
+													"   "<<consoles.at(i)->getEstado()<<"          "<<consoles.at(i)->getPrecio()<<endl;
+													cont++;
+												}
+											}
+											if(cont!=0){
+												int serie;
+												cout<<"Ingrese Serie de Consola a Comprar: ";
+												cin>>serie;
+												bool existe=false;
+												int pos;
+												for (int i = 0; i < consoles.size(); ++i){
+													if(serie==consoles.at(i)->getSerie()){
+														existe=true;
+														pos=i;
 													}
 												}
-												break;
+												if(existe){
+													string estado,modelo;
+													int serie,ano;
+													double precio;
+													modelo=(static_cast<Sony*>(consoles.at(pos)))->getModelo();
+													
+													estado=consoles.at(pos)->getEstado();
+													serie=consoles.at(pos)->getSerie();
+													ano=consoles.at(pos)->getAno();
+													precio=consoles.at(pos)->getPrecio();
+													
+													cliente->setConsola(new Sony(modelo,estado,serie,precio,ano));
+													cliente->setSubTotal(precio);
+													delete consoles.at(pos);
+													consoles.erase(consoles.begin()+pos);
+													cout<<"Consola agregada a lista!\n";
+												}else{
+													cout<<"Numero de Serie no existe!\n";
+												}
+											}else{
+												cout<<"No hay Consolas de ese Fabricante!\n";
 											}
-											case 2:{
-
-												break;
-											}
-											case 3:{
-
-												break;
-											}
+											////	
+											break;
 										}
-										
+										case 2:{//Nintendo
+											int cont;
+											for (int i = 0; i < consoles.size(); ++i){
+												if(i==0){
+													cout<<" #       Modelo         Serie        Ano      Estado       Precio\n";
+												}
+												string tipo=typeid(*consoles.at(i)).name();
+												if(tipo=="8Nintendo"){
+													cout<<(i+1)<<")- "<<(static_cast<Nintendo*>(consoles.at(i)))->getModelo()<<
+													"          "<<consoles.at(i)->getSerie()<<"        "<<consoles.at(i)->getAno()<<"   "<<
+													"   "<<consoles.at(i)->getEstado()<<"          "<<consoles.at(i)->getPrecio()<<endl;
+													cont++;
+												}
+											}
+											if(cont!=0){
+												int serie;
+												cout<<"Ingrese Serie de Consola a Comprar: ";
+												cin>>serie;
+												bool existe=false;
+												int pos;
+												for (int i = 0; i < consoles.size(); ++i){
+													if(serie==consoles.at(i)->getSerie()){
+														existe=true;
+														pos=i;
+													}
+												}
+												if(existe){
+													string estado,modelo;
+													int serie,ano;
+													double precio;
+													modelo=(static_cast<Nintendo*>(consoles.at(pos)))->getModelo();
+													
+													estado=consoles.at(pos)->getEstado();
+													serie=consoles.at(pos)->getSerie();
+													ano=consoles.at(pos)->getAno();
+													precio=consoles.at(pos)->getPrecio();
+													
+													cliente->setConsola(new Nintendo(modelo,estado,serie,precio,ano));
+													cliente->setSubTotal(precio);
+													delete consoles.at(pos);
+													consoles.erase(consoles.begin()+pos);
+													cout<<"Consola agregada a lista!\n";
+												}else{
+													cout<<"Numero de Serie no existe!\n";
+												}
+											}else{
+												cout<<"No hay Consolas de ese Fabricante!\n";
+											}
+											/////break nintendo
+											break;
+										}
+										case 3:{//Microsoft
+											int cont;
+											for (int i = 0; i < consoles.size(); ++i){
+												if(i==0){
+													cout<<" #       Modelo         Serie        Ano      Estado       Precio\n";
+												}
+												string tipo=typeid(*consoles.at(i)).name();
+												if(tipo=="9Microsoft"){
+													cout<<(i+1)<<")-     "<<(static_cast<Microsoft*>(consoles.at(i)))->getModelo()<<
+													"          "<<consoles.at(i)->getSerie()<<"        "<<consoles.at(i)->getAno()<<"   "<<
+													"   "<<consoles.at(i)->getEstado()<<"             "<<consoles.at(i)->getPrecio()<<endl;
+													cont++;
+												}
+											}
+											if(cont!=0){
+												int serie;
+												cout<<"Ingrese Serie de Consola a Comprar: ";
+												cin>>serie;
+												bool existe=false;
+												int pos;
+												for (int i = 0; i < consoles.size(); ++i){
+													if(serie==consoles.at(i)->getSerie()){
+														existe=true;
+														pos=i;
+													}
+												}
+												if(existe){
+													string estado,modelo;
+													int serie,ano;
+													double precio;
+													modelo=(static_cast<Microsoft*>(consoles.at(pos)))->getModelo();
+													
+													estado=consoles.at(pos)->getEstado();
+													serie=consoles.at(pos)->getSerie();
+													ano=consoles.at(pos)->getAno();
+													precio=consoles.at(pos)->getPrecio();
+													
+													cliente->setConsola(new Microsoft(modelo,estado,serie,precio,ano));
+													cliente->setSubTotal(precio);
+													delete consoles.at(pos);
+													consoles.erase(consoles.begin()+pos);
+													cout<<"Consola agregada a lista!\n";
+												}else{
+													cout<<"Numero de Serie no existe!\n";
+												}
+											}else{
+												cout<<"No hay Consolas de ese Fabricante!\n";
+											}
+											break;
+										}
 									}
+									break;
+								}
+								case 2:{//vender Videojuegos
 
 									break;
 								}
-								case 2:{
+								case 3:{//facturar
+									cout<<cliente->getSubTotal()<<endl;
+									cout<<cliente->getConsola().size();
 
+									fact=false;
 									break;
 								}
 							}
-					    }
+						}
+						break;
+					}
+					case 2:{//Agregar Inventario
+
 
 						break;
 					}
-					case 2:{
 
-						break;
-					}
+
 				}
 
+
+				deal=dealerOption();
 			}
 			break;
 		}
@@ -1197,14 +1318,15 @@ int ventaOption(){
 	do{
 	cout<<"1)- Consolas\n"<<
 		  "2)- VideoJuego\n"<<
+		  "3)- Facturar\n"<<
 		  "Ingrese Opcion: ";
 	cin>>retval;
-	if(retval<1 || retval>2){
+	if(retval<1 || retval>3){
 		cout<<"Opcion Invalida!\n";
 	}else{
 		return retval;
 	}
-	}while(retval<1 || retval>2);
+	}while(retval<1 || retval>3);
 }
 
 
