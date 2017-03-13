@@ -5,6 +5,8 @@
 using namespace std;
 
 class Microsoft: public Consola{
+friend class boost::serialization::access;
+
 private:
 	string modelo;
 public:
@@ -13,6 +15,10 @@ public:
 	virtual void setModelo(string);
 	virtual string getModelo();
 
+ template<class Archive>
+ void serialize(Archive & ar, const unsigned int /* file_version */){
+        ar & modelo & boost::serialization::base_object<Consola>(*this);
+ }
 	
 	
 };
