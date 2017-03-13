@@ -1,9 +1,9 @@
-
 #include "Consola.h"
-#ifndef MICROSOFT_H
-#define MICROSOFT_H
+
 using namespace std;
 
+#ifndef MICROSOFT_H
+#define MICROSOFT_H
 class Microsoft: public Consola{
 friend class boost::serialization::access;
 

@@ -1,6 +1,7 @@
-#pragma once
-#include "Videojuego.h"
 
+#include "Videojuego.h"
+#ifndef SQUAREENIXGAME_H
+#define SQUAREENIXGAME_H
 class SquareEnixgame:public Videojuego{
 friend class boost::serialization::access;
 private:
@@ -14,3 +15,4 @@ public:
 	string getCreador();
 	
 };
+#endif

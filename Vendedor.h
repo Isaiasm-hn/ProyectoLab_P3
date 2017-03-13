@@ -1,10 +1,11 @@
-#pragma once
+
 #include "Usuario.h"
 #include <ctime>
 #include <vector>
 #include <sstream>
 
-
+#ifndef VENDEDOR_H
+#define VENDEDOR_H
 class Vendedor:public Usuario{
 private:
 	string hora_entrada;
@@ -18,3 +19,4 @@ public:
 	string getSalida();
 	
 };
+#endif

@@ -1,6 +1,7 @@
-#pragma once
-#include "Videojuego.h"
 
+#include "Videojuego.h"
+#ifndef ELECTRONICARTGAME_H
+#define ELECTRONICARTGAME_H
 class ElectronicArtgame:public Videojuego{
 friend class boost::serialization::access;
 private:
@@ -14,3 +15,4 @@ public:
 	string getCreador();
 	
 };
+#endif

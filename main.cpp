@@ -6,7 +6,6 @@
 #include "Administrador.h"
 #include "Vendedor.h"
 #include "Videojuego.h"
-#include "Microsoft.h"
 #include "Microsoftgame.h"
 #include "Nintendogame.h"
 #include "Sonygame.h"
@@ -30,6 +29,10 @@
 #include "Venta.h"
 
 
+#include <exception>
+#include <boost/archive/polymorphic_binary_iarchive.hpp>
+#include <boost/archive/polymorphic_binary_oarchive.hpp>
+
 using namespace std;
 
 string getHora();
@@ -49,8 +52,13 @@ int dealerOption();
 int ventaOption();
 void ListarConsolas(vector<Consola*>);
 int ventaGames();
-Videojuego* GameCopy(Videojuego*,string);
 
+void save(const DataBase &s, const char* filename){
+
+    std::ofstream ofs(filename, std::ios::binary);
+    boost::archive::polymorphic_binary_oarchive oa(ofs);
+    oa << s;
+}
 
 
 

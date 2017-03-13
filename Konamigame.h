@@ -1,6 +1,7 @@
-#pragma once
-#include "Videojuego.h"
 
+#include "Videojuego.h"
+#ifndef KONAMIGAME_H
+#define KONAMIGAME_H
 class Konamigame:public Videojuego{
 	friend class boost::serialization::access;
 	private:
@@ -13,5 +14,5 @@ class Konamigame:public Videojuego{
 		Konamigame(string,int,int,string,string,int,double);
 		string getCreador();
 	
-	
 };
+#endif

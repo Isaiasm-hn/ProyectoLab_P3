@@ -1,6 +1,7 @@
-#pragma once
-#include "Usuario.h"
 
+#include "Usuario.h"
+#ifndef ADMINISTADOR_H
+#define ADMINISTADOR_H
 class Administrador:public Usuario{
 private:
 	string password;
@@ -11,3 +12,4 @@ public:
 	
 	
 };
+#endif

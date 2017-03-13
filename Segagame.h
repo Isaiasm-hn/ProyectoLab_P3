@@ -1,6 +1,7 @@
-#pragma once
-#include "Videojuego.h"
 
+#include "Videojuego.h"
+#ifndef SEGAGAME_H
+#define SEGAGAME_H
 class Segagame:public Videojuego{
 friend class boost::serialization::access;
 private:
@@ -14,3 +15,4 @@ public:
 	string getCreador();
 	
 };
+#endif

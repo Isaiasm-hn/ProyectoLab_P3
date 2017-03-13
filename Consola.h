@@ -5,12 +5,10 @@
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/assume_abstract.hpp>
 
-#ifndef CONSOLA_H
-#define CONSOLA_H
-
-
 using namespace std;
 
+#ifndef CONSOLA_H
+#define CONSOLA_H
 class Consola{
 friend class boost::serialization::access;
 

@@ -1,6 +1,8 @@
-#pragma once
+
 #include "Videojuego.h"
 
+#ifndef MICROSOFTGAME_H
+#define MICROSOFTGAME_H
 class Microsoftgame:public Videojuego{
 friend class boost::serialization::access;	
 
@@ -15,3 +17,4 @@ public:
 	Microsoftgame(string,int,int,string,string,int,double);
 	string getCreador();
 };
+#endif

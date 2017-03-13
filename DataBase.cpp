@@ -1,35 +1,41 @@
 #include "DataBase.h"
 
 
-DataBase::DataBase(vector<Consola*> con,vector<Videojuego*> gam ,vector<Usuario*> usu){
-	this->consoles=con;
+DataBase::DataBase(vector<Consola*> con,vector<Videojuego*> gam ){
+	this->consolas=con;
 	this->games=gam;
-	this->users=usu;
+	
 
 }
 
 void DataBase::setConsolas(vector<Consola*> con){
-	this->consoles=con;
+	this->consolas=con;
 }
 
 void DataBase::setVideojuegos(vector<Videojuego*> gam){
 	this->games=gam;
 }
 
-void DataBase::setUsarios(vector<Usuario*> usu){
-	this->users=usu;
-}
 
 vector<Consola*> DataBase::getConsolas(){
-	return consoles;
+	return consolas;
 }
 
 vector<Videojuego*>  DataBase::getVideojuegos(){
 	return games;
 }
 
-vector<Usuario*> DataBase::getUsuarios(){
-	return users;
+DataBase::~DataBase(){
+	for (int i = 0; i < consolas.size(); ++i)
+	{
+		delete consolas[i];
+	}
+	for (int i = 0; i < games.size(); ++i)
+	{
+		delete games[i];
+	}
+	consolas.clear();
+	games.clear();
 }
 
 

@@ -1,4 +1,4 @@
-#pragma once
+
 #include "Consola.h"
 #include "Videojuego.h"
 #include <iostream>
@@ -6,7 +6,8 @@
 #include <vector>
 
 using namespace std;
-
+#ifndef VENTA_H
+#define VENTA_H
 class Venta{
 private:
 	string nombre;
@@ -35,3 +36,4 @@ public:
 
 	
 };
+#endif
