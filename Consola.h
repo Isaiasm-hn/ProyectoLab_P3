@@ -1,10 +1,14 @@
-#pragma once
+
 #include <iostream>
 #include <string>
+#ifndef CONSOLA_H
+#define CONSOLA_H
+
 
 using namespace std;
 
 class Consola{
+	
 private:
 	string estado;
 	int serie;
@@ -25,7 +29,5 @@ public:
 	virtual void setAno(int);
 	virtual int getAno();
 	virtual string getModelo();
-
-
-	
 };
+#endif

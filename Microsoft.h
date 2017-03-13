@@ -1,6 +1,7 @@
-#pragma once
-#include "Consola.h"
 
+#include "Consola.h"
+#ifndef MICROSOFT_H
+#define MICROSOFT_H
 using namespace std;
 
 class Microsoft: public Consola{
@@ -15,3 +16,4 @@ public:
 	
 	
 };
+#endif

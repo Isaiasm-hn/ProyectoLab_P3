@@ -1,9 +1,10 @@
-#pragma once
+
 #include <iostream>
 #include <string>
 
 using namespace std;
-
+#ifndef VIDEOJUEGO_H
+#define VIDEOJUEGO_H
 class Videojuego{
 private:
 	string nombre;
@@ -33,10 +34,5 @@ public:
 	virtual int getAno();
 	virtual int getPlayers();
 	virtual double getPrecio();
-	
-
-
-
-	
-	
 };
+#endif

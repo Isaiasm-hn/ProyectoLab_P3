@@ -1,3 +1,4 @@
+#pragma once
 #include "Videojuego.h"
 
 class Ubisoftgame:public Videojuego{

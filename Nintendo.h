@@ -1,6 +1,8 @@
-#pragma once
+
 #include "Consola.h"
 
+#ifndef NINTENDO_H
+#define NINTENDO_H
 class Nintendo:public Consola{
 private:
 	string modelo;
@@ -10,6 +12,5 @@ public:
 
 	virtual void setModelo(string);
 	virtual string getModelo();
-	
-	
 };
+#endif
