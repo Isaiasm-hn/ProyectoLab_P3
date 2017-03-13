@@ -13,6 +13,9 @@ private:
 		ar & creador & boost::serialization::base_object<Videojuego>(*this);
     }
 public:
+	Sonygame(){
+		
+	}
 	Sonygame(string,int,int,string,string,int,double);
 	string getCreador();
 };

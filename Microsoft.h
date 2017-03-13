@@ -11,7 +11,9 @@ private:
 	string modelo;
 public:
 	Microsoft(string,string,int,double,int);
-	
+	Microsoft(){
+		
+	}
 	virtual void setModelo(string);
 	virtual string getModelo();
 

@@ -14,6 +14,9 @@ private:
 		ar & creador & boost::serialization::base_object<Videojuego>(*this);
     }
 public:
+	Microsoftgame(){
+		
+	}
 	Microsoftgame(string,int,int,string,string,int,double);
 	string getCreador();
 };

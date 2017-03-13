@@ -1,5 +1,6 @@
 #include "DataBase.h"
-
+DataBase::DataBase(){
+}
 
 DataBase::DataBase(vector<Consola*> con,vector<Videojuego*> gam ){
 	this->consolas=con;

@@ -25,7 +25,8 @@ template<class Archive>
 	}
 public:
 	//contructor
-	Consola();
+	Consola(){
+	}
 	Consola(string,int,double,int);
 	
 	virtual void setEstado(string);

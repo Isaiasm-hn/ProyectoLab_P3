@@ -28,6 +28,9 @@ void serialize(Archive & ar, const unsigned int /* file_version */){
 }
 
 public:
+	Videojuego(){
+		
+	}
 	Videojuego(string,int,string,int,string,string,int,double);
 	virtual void setNombre(string);
 	virtual void setAno(int);

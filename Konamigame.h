@@ -11,6 +11,9 @@ class Konamigame:public Videojuego{
         ar & creador & boost::serialization::base_object<Videojuego>(*this);
     }
 	public:
+		Konamigame(){
+			
+		}
 		Konamigame(string,int,int,string,string,int,double);
 		string getCreador();
 	

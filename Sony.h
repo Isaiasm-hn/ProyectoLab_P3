@@ -10,6 +10,9 @@ private:
 	string modelo;
 
 public:
+	Sony(){
+		
+	}
 	Sony(string,string,int,double,int);
 	virtual void setModelo(string);
 	virtual string getModelo();

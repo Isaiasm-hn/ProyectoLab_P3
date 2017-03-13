@@ -8,3 +8,4 @@ Bandaigame::Bandaigame(string pNombre,int pAno,int pPlayers,string pGenero,strin
 string Bandaigame::getCreador(){
 	return creador;
 }
+Bandaigame::~Bandaigame(){}

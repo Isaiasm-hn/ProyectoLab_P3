@@ -11,6 +11,7 @@ void serialize(Archive & ar, const unsigned int /* file_version */){
     ar & creador & boost::serialization::base_object<Videojuego>(*this);
 }
 public:
+	SquareEnixgame(){}
 	SquareEnixgame(string,int,int,string,string,int,double);
 	string getCreador();
 	

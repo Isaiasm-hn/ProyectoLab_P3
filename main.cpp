@@ -28,7 +28,7 @@
 #include <time.h>
 #include "Venta.h"
 
-
+#include <regex>
 #include <exception>
 #include <boost/archive/polymorphic_binary_iarchive.hpp>
 #include <boost/archive/polymorphic_binary_oarchive.hpp>
@@ -52,13 +52,25 @@ int dealerOption();
 int ventaOption();
 void ListarConsolas(vector<Consola*>);
 int ventaGames();
-
-void save(const DataBase &s, const char* filename){
-
+/*void Guardar(const DataBase &s, const char* filename)
+{
+    // make an archive
     std::ofstream ofs(filename, std::ios::binary);
     boost::archive::polymorphic_binary_oarchive oa(ofs);
     oa << s;
 }
+
+void Cargar(DataBase &s, const char* filename)
+{
+    // open the archive
+    std::ifstream ifs(filename, std::ios::binary);
+    boost::archive::polymorphic_binary_iarchive ia(ifs);
+
+    // restore the schedule from the archive
+    ia >> s;
+}
+*/
+
 
 
 
@@ -66,7 +78,16 @@ int main(){
 	Usuario* admin=new Administrador("admin","admin");
 	vector<Consola*> consoles;
 	vector<Videojuego*> games;
-	
+	DataBase db;
+	//Cargar(db,"Invent.bin");
+	for (int i = 0; i < db.getConsolas().size(); ++i)
+	{
+		consoles.push_back(db.getConsolas().at(i));
+	}
+	for (int i = 0; i < db.getVideojuegos().size(); ++i)
+	{
+		games.push_back(db.getVideojuegos().at(i));
+	}
 
 	int menu_principal=userOption(admin);
 
@@ -1380,6 +1401,10 @@ int main(){
 		}
 		default:{
 			cout<<"------Saliendo del Sistema-------\n";
+			DataBase db1;
+			db1.setConsolas(consoles);
+			db1.setVideojuegos(games);
+			//Guardar(db1,"Invent.bin");
 			break;
 		}
 	}menu_principal=userOption(admin);

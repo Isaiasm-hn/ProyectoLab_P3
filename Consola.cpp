@@ -2,9 +2,7 @@
 
 using namespace std;
 
-Consola::Consola(){
-	
-}
+
 
 Consola::Consola(string pEstado,int pSerie,double pPrecio,int pAno){
 	this->estado=pEstado;

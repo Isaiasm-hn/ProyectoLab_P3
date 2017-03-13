@@ -33,6 +33,7 @@ private:
 	vector<Videojuego*> games;
 	
 public:
+    DataBase();
 	DataBase(vector<Consola*>,vector<Videojuego*>);
 	~DataBase();
 
